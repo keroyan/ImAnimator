@@ -5,11 +5,12 @@
 template <typename T>
 class Animator {
 public:
-    Animator(T a, T b, float speed = 2.f) noexcept
+    Animator(T a, T b, bool* when float speed = 2.f) noexcept
     {
         this->startPoint = a; // the point A
         this->endPoint = b; // the point B
         this->flAnimationSpeed = speed; // the speed this animation shall happen
+        this->bWhen = when;
     }
 
     auto GetCurrentAnimation(ImGuiID id) noexcept
@@ -24,7 +25,7 @@ public:
         return itAnimation;
     }
 
-    T Update(ImGuiID id, bool when) noexcept
+    T Update(ImGuiID id) noexcept
     {
         auto itAnimation = GetCurrentAnimation(id);
         itAnimation->second = Clamp(itAnimation->second + ImGui::GetIO().DeltaTime * flAnimationSpeed * (bWhen ? 1.f : -1.f), 0.f, 1.0f);
