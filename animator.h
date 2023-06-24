@@ -5,11 +5,10 @@
 template <typename T>
 class Animator {
 public:
-    Animator(T a, T b, bool* when, float speed = 2.f) noexcept
+    Animator(T a, T b, float speed = 2.f) noexcept
     {
         this->startPoint = a; // the point A
         this->endPoint = b; // the point B
-        this->bWhen = when; // when shall it go from A to B, if true it will go from A to B and if it's false then from B to A
         this->flAnimationSpeed = speed; // the speed this animation shall happen
     }
 
@@ -25,10 +24,10 @@ public:
         return itAnimation;
     }
 
-    T Update(ImGuiID id) noexcept
+    T Update(ImGuiID id, bool when) noexcept
     {
         auto itAnimation = GetCurrentAnimation(id);
-        itAnimation->second = Clamp(itAnimation->second + ImGui::GetIO().DeltaTime * flAnimationSpeed * (*bWhen ? 1.f : -1.f), 0.f, 1.0f);
+        itAnimation->second = Clamp(itAnimation->second + ImGui::GetIO().DeltaTime * flAnimationSpeed * (bWhen ? 1.f : -1.f), 0.f, 1.0f);
         return Lerp(startPoint, endPoint, itAnimation->second);
     }
 
@@ -43,5 +42,5 @@ private:
     std::unordered_map<ImGuiID, float> mAnimator;
     T startPoint, endPoint;
     float flAnimationSpeed;
-    bool* bWhen;
+    bool bWhen;
 };
