@@ -28,7 +28,7 @@ public:
     T Update(ImGuiID id) noexcept
     {
         auto itAnimation = GetCurrentAnimation(id);
-        itAnimation->second = Clamp(itAnimation->second + ImGui::GetIO().DeltaTime * flAnimationSpeed * (bWhen ? 1.f : -1.f), 0.f, 1.0f);
+        itAnimation->second = Clamp(itAnimation->second + ImGui::GetIO().DeltaTime * flAnimationSpeed * (*bWhen ? 1.f : -1.f), 0.f, 1.0f);
         return Lerp(startPoint, endPoint, itAnimation->second);
     }
 
@@ -43,5 +43,5 @@ private:
     std::unordered_map<ImGuiID, float> mAnimator;
     T startPoint, endPoint;
     float flAnimationSpeed;
-    bool bWhen;
+    bool* bWhen;
 };
