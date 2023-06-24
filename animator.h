@@ -5,7 +5,7 @@
 template <typename T>
 class Animator {
 public:
-    Animator(T a, T b, bool* when float speed = 2.f) noexcept
+    Animator(T a, T b, bool* when, float speed = 2.f) noexcept
     {
         this->startPoint = a; // the point A
         this->endPoint = b; // the point B
