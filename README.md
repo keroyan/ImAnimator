@@ -1,5 +1,5 @@
 # ImAnimator
-A simple lightweight animator class to help you make any imgui element dynamic and beautiful
+A simple header-only animator class to help you make any imgui element dynamic and beautiful
 
 # Usage
 
